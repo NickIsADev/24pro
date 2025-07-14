@@ -62,7 +62,7 @@ function showDetails(aircraft) {
         <p><strong>Callsign:</strong> ${aircraft.flight}</p>
         <p><strong>Altitude:</strong> ${aircraft.alt_geom} ft</p>
         <p><strong>Speed:</strong> ${aircraft.gs} kts</p>
-        <p><strong>Squawk:</strong> ${aircraft.squawk}</p>
+        
         <p><strong>Latitude:</strong> ${aircraft.lat}</p>
         <p><strong>Longitude:</strong> ${aircraft.lon}</p>
     `;
