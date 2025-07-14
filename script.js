@@ -25,9 +25,23 @@ const aircraftIcon = L.icon({
     iconAnchor: [12, 12],
 });
 
-function updateMap(aircraft) {
+function updateMap(aircraftData) {
     aircraftLayer.clearLayers();
-    aircraft.forEach(ac => {
+    const aircraftArray = Object.keys(aircraftData).map(key => {
+        const ac = aircraftData[key];
+        return {
+            flight: key,
+            lat: ac.position.y,
+            lon: ac.position.x,
+            alt_geom: ac.altitude,
+            gs: ac.speed,
+            track: ac.heading,
+            // squawk: ac.squawk, // Squawk is not in the provided sample, commenting out for now
+            ...ac
+        };
+    });
+
+    aircraftArray.forEach(ac => {
         const marker = L.marker([ac.lat, ac.lon], { 
             icon: aircraftIcon,
             rotationAngle: ac.track
