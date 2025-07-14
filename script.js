@@ -12,7 +12,7 @@ async function fetchAircraftData() {
     try {
         const response = await fetch('https://api.duckybot.xyz/atc24/aircraft');
         const data = await response.json();
-        updateMap(data.aircraft);
+        updateMap(data.data);
     } catch (error) {
         console.error('Error fetching aircraft data:', error);
     }
