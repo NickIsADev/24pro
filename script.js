@@ -31,9 +31,34 @@ function updateMap(aircraft) {
             icon: aircraftIcon,
             rotationAngle: ac.track
         }).addTo(aircraftLayer);
-        marker.bindPopup(`<b>${ac.flight}</b><br>Altitude: ${ac.alt_geom} ft`);
+
+        marker.on('click', () => {
+            showDetails(ac);
+        });
     });
 }
+
+const detailsPanel = document.getElementById('details-panel');
+const detailsContent = document.getElementById('details-content');
+const closeBtn = document.getElementById('close-btn');
+
+function showDetails(aircraft) {
+    detailsContent.innerHTML = `
+        <p><strong>Callsign:</strong> ${aircraft.flight}</p>
+        <p><strong>Altitude:</strong> ${aircraft.alt_geom} ft</p>
+        <p><strong>Speed:</strong> ${aircraft.gs} kts</p>
+        <p><strong>Squawk:</strong> ${aircraft.squawk}</p>
+        <p><strong>Latitude:</strong> ${aircraft.lat}</p>
+        <p><strong>Longitude:</strong> ${aircraft.lon}</p>
+    `;
+    detailsPanel.classList.add('visible');
+    detailsPanel.classList.remove('hidden');
+}
+
+closeBtn.addEventListener('click', () => {
+    detailsPanel.classList.remove('visible');
+    detailsPanel.classList.add('hidden');
+});
 
 fetchAircraftData();
 setInterval(fetchAircraftData, 10000);
