@@ -10,7 +10,7 @@ const aircraftLayer = L.layerGroup().addTo(map);
 
 async function fetchAircraftData() {
     try {
-        const response = await fetch('https://24data.ptfs.app/acft-data');
+        const response = await fetch('https://api.duckybot.xyz/atc24/aircraft');
         const data = await response.json();
         updateMap(data.aircraft);
     } catch (error) {
