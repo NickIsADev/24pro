@@ -16,10 +16,19 @@ async function fetchAircraftData() {
     }
 }
 
+const aircraftIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/1029/1029183.png',
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+});
+
 function updateMap(aircraft) {
     aircraftLayer.clearLayers();
     aircraft.forEach(ac => {
-        const marker = L.marker([ac.lat, ac.lon]).addTo(aircraftLayer);
+        const marker = L.marker([ac.lat, ac.lon], { 
+            icon: aircraftIcon,
+            rotationAngle: ac.track
+        }).addTo(aircraftLayer);
         marker.bindPopup(`<b>${ac.flight}</b><br>Altitude: ${ac.alt_geom} ft`);
     });
 }
